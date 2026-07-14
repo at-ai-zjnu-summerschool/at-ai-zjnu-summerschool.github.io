@@ -262,7 +262,8 @@ section {
 /* Tabella programma */
 .program-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: 0.95rem;
 }
 .program-table th {
@@ -272,6 +273,12 @@ section {
     padding: 0.8rem 0.6rem;
     text-align: left;
     border-bottom: 2px solid var(--border);
+}
+.program-table th:first-child {
+    border-top-left-radius: 12px;
+}
+.program-table th:last-child {
+    border-top-right-radius: 12px;
 }
 .program-table td {
     padding: 0.7rem 0.6rem;
@@ -285,19 +292,92 @@ section {
     white-space: nowrap;
     font-weight: 500;
     color: var(--primary);
-    width: 10%;
-}
-.program-table .day {
-    font-weight: 600;
-    color: var(--text);
-    width: 10%;
+    width: 9%;
 }
 .program-table .title {
-    width: 42%;
+    width: 43%;
 }
 .program-table .speaker {
     width: 28%;
     color: var(--text-light);
+}
+
+/* Colonna data raggruppata: badge "calendario" solo sulla prima riga di ogni
+   giorno; le righe successive (incluso l'abstract) hanno una cella "day-spacer"
+   vuota della stessa tinta, cosi il blocco colore resta continuo senza mai
+   dover unire celle con rowspan (che non convive bene con righe abstract
+   che compaiono/scompaiono). */
+.program-table .day,
+.program-table .day-spacer {
+    width: 9%;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid var(--border);
+}
+.program-table .day {
+    padding: 0.9rem 0.4rem;
+}
+.date-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    margin: 0 auto;
+    width: 56px;
+    padding: 0.55rem 0.3rem 0.45rem;
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(1, 90, 42, 0.22);
+}
+.date-badge .date-num {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1;
+}
+.date-badge .date-month {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #cfe8bd;
+    margin-top: 0.15rem;
+}
+
+/* Alternanza cromatica tra un giorno e il successivo: ogni riga (dati o
+   abstract) porta direttamente la classe del proprio gruppo, quindi la
+   tinta è sempre corretta per costruzione — nessuna dipendenza da rowspan
+   o da selettori "riga adiacente" che potevano disallinearsi. */
+tr.day-group-a > td.time,
+tr.day-group-a > td.title,
+tr.day-group-a > td.speaker,
+tr.day-group-a > td.abstract-cell {
+    background: #eef4e9;
+}
+tr.day-group-a > td.day,
+tr.day-group-a > td.day-spacer {
+    background: #cfe0c3;
+}
+tr.day-group-b > td.time,
+tr.day-group-b > td.title,
+tr.day-group-b > td.speaker,
+tr.day-group-b > td.abstract-cell {
+    background: #f8faf6;
+}
+tr.day-group-b > td.day,
+tr.day-group-b > td.day-spacer {
+    background: #e4ecdf;
+}
+
+/* L'abstract, essendo un filo più scuro della stessa tinta, si legge come
+   "espansione" della propria riga anziché come blocco a sé stante. */
+tr.abstract-row.day-group-a > td.abstract-cell {
+    background: #e2ecd9;
+}
+tr.abstract-row.day-group-b > td.abstract-cell {
+    background: #eef3e9;
 }
 
 /* Pulsante toggle abstract nel titolo */
@@ -343,9 +423,7 @@ section {
     background: var(--primary);
     color: #fff;
 }
-.program-table tr.active-row td {
-    background: var(--primary-light);
-}
+
 
 /* Riga abstract nascosta di default */
 .abstract-row {
@@ -355,7 +433,6 @@ section {
     display: table-row;
 }
 .abstract-row td {
-    background: #f3f7f0;
     border-bottom: 1px solid var(--border);
 }
 .abstract-content {
@@ -405,6 +482,9 @@ section {
     .program-table th, .program-table td { padding: 0.4rem 0.3rem; }
     .program-table .day { width: 15%; }
     .program-table .time { width: 12%; }
+    .date-badge { width: 42px; padding: 0.4rem 0.2rem 0.3rem; }
+    .date-badge .date-num { font-size: 1.05rem; }
+    .date-badge .date-month { font-size: 0.55rem; }
     .bio-en, .bio-zh {
         padding: 0.3rem 0.4rem;
         font-size: 0.85rem;
