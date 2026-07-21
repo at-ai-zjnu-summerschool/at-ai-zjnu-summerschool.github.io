@@ -485,10 +485,15 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         font-size: 0.85rem;
     }
     .abstract-content { font-size: 0.82rem; }
+}
 
-    /* Tabella programma: da tabella a "card" impilate, ma con lo stesso
-       linguaggio visivo della tabella desktop (righe piene, alternanza
-       colore per giorno, linee separatrici tra i campi) */
+/* Tabella programma: da tabella a "card" impilate, ma con lo stesso
+   linguaggio visivo della tabella desktop (righe piene, alternanza
+   colore per giorno, linee separatrici tra i campi).
+   Attiva SOLO su schermi realmente da smartphone: sopra questa soglia
+   (tablet compresi) resta la tabella normale, con scroll orizzontale
+   se necessario. */
+@media (max-width: 480px) {
     .program-table { font-size: 0.85rem; }
     .program-table thead { display: none; }
     .program-table, .program-table tbody, .program-table td {
@@ -505,7 +510,7 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         padding: 0.7rem 0.85rem;
         border: 1px solid var(--border);
         border-radius: 10px;
-        margin-bottom: 0;
+        margin-bottom: 0.6rem;
     }
     .program-table tbody tr.day-group-a:not(.abstract-row) {
         background: #eef4e9;
@@ -521,6 +526,7 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         flex-wrap: wrap;
         padding: 0 0.85rem 0.75rem;
         margin-top: -1px;
+        margin-bottom: 0.6rem;
         border: 1px solid var(--border);
         border-top: none;
         border-radius: 0 0 10px 10px;
@@ -532,16 +538,10 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         background: #eef3e9;
     }
 
-    /* Spazio tra una scheda-riga e la successiva (compensato quando
-       la scheda ha anche l'abstract aperto sotto) */
-    .program-table tbody tr:not(.abstract-row) {
-        margin-bottom: 0.6rem;
-    }
+    /* Quando una card ha l'abstract aperto subito sotto, la card non deve
+       avere il proprio margine: l'unico margine è quello della riga abstract */
     .program-table tbody tr:not(.abstract-row):has(+ tr.abstract-row.open) {
         margin-bottom: 0;
-    }
-    .program-table tbody tr.abstract-row.open {
-        margin-bottom: 0.6rem;
     }
 
     /* I singoli td non hanno più un colore proprio: il colore ora vive
@@ -552,51 +552,57 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         background: transparent !important;
     }
 
+    /* La data occupa da sola tutta la larghezza della card, sopra
+       l'orario, così non resta schiacciata accanto al titolo */
     .program-table .day,
     .program-table .day-spacer {
         border-right: none;
-        width: auto;
+        width: 100%;
     }
     .program-table .day {
         order: 1;
-        flex: 0 0 auto;
-        margin-right: 0.6rem;
+        flex: 1 1 100%;
+        margin: 0 0 0.6rem 0;
         padding: 0;
     }
     .program-table .day-spacer {
         display: none;
     }
     .date-badge {
-        width: 42px;
-        padding: 0.4rem 0.2rem 0.3rem;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: flex-start;
+        gap: 0.4rem;
+        width: 100%;
+        padding: 0.45rem 0.8rem;
         margin: 0;
+        border-radius: 8px;
     }
-    .date-badge .date-num { font-size: 1.05rem; }
-    .date-badge .date-month { font-size: 0.55rem; }
+    .date-badge .date-num { font-size: 1.1rem; }
+    .date-badge .date-month { font-size: 0.65rem; margin-top: 0; }
 
     .program-table .time {
         order: 2;
-        flex: 1 1 auto;
-        width: auto;
+        flex: 1 1 100%;
+        width: 100%;
         white-space: nowrap;
         padding-bottom: 0.5rem;
         margin-bottom: 0.5rem;
         border-bottom: 1px solid var(--border);
     }
-    /* Se non c'è il badge data (righe di continuazione), la riga
-       separatrice del time deve occupare tutta la larghezza della card */
-    .program-table tr:has(.day-spacer) .time {
-        flex: 1 1 100%;
-        width: 100%;
-    }
 
-    .program-table .title,
-    .program-table .abstract-toggle,
-    .program-table .plain-title {
+    /* Il td.title resta solo un contenitore per il layout; la riga
+       separatrice sta unicamente sull'elemento interno (bottone o testo),
+       cosi non compaiono due linee sovrapposte tra titolo e relatore */
+    .program-table .title {
         order: 3;
         flex: 1 1 100%;
         width: 100%;
-        margin-top: 0;
+    }
+    .program-table .abstract-toggle,
+    .program-table .plain-title {
+        display: block;
+        width: 100%;
         padding-bottom: 0.5rem;
         margin-bottom: 0.5rem;
         border-bottom: 1px solid var(--border);
@@ -609,11 +615,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         width: 100%;
         margin-top: 0;
         font-size: 0.82rem;
-    }
-    /* L'ultimo campo della card non deve avere linea sotto */
-    .program-table tbody tr:not(.abstract-row) .speaker {
-        border-bottom: none;
-        padding-bottom: 0;
     }
     .program-table .abstract-cell {
         order: 3;
