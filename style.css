@@ -367,6 +367,16 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     background: #eef3e9;
 }
 
+/* Titolo semplice (righe senza abstract, es. registrazione, cerimonie) */
+.plain-title {
+    display: inline-block;
+    font-family: var(--font);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+}
+
 /* Pulsante toggle abstract nel titolo */
 .abstract-toggle {
     font-family: var(--font);
@@ -470,18 +480,90 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     header h1 { font-size: 2rem; }
     .section-title { font-size: 1.5rem; }
     .speakers-grid { grid-template-columns: 1fr; }
-    .program-table { font-size: 0.8rem; }
-    .program-table th, .program-table td { padding: 0.4rem 0.3rem; }
-    .program-table .day { width: 15%; }
-    .program-table .time { width: 12%; }
-    .date-badge { width: 42px; padding: 0.4rem 0.2rem 0.3rem; }
-    .date-badge .date-num { font-size: 1.05rem; }
-    .date-badge .date-month { font-size: 0.55rem; }
     .bio-en, .bio-zh {
         padding: 0.3rem 0.4rem;
         font-size: 0.85rem;
     }
     .abstract-content { font-size: 0.82rem; }
+
+    /* Tabella programma: da tabella a "card" impilate, niente overflow orizzontale */
+    .program-table { font-size: 0.85rem; }
+    .program-table thead { display: none; }
+    .program-table, .program-table tbody, .program-table td {
+        display: block;
+        width: 100%;
+    }
+    .program-table tbody tr:not(.abstract-row) {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0.65rem 0.7rem;
+        border-bottom: none;
+        border-radius: 10px;
+        margin-bottom: 0.45rem;
+    }
+    .program-table tbody tr.abstract-row.open {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 0.7rem 0.6rem;
+        margin-top: -0.45rem;
+        margin-bottom: 0.45rem;
+        border-radius: 0 0 10px 10px;
+    }
+    .program-table td {
+        padding: 0;
+        border-bottom: none;
+    }
+    .program-table .day,
+    .program-table .day-spacer {
+        border-right: none;
+        width: auto;
+    }
+    .program-table .day {
+        order: 1;
+        flex: 0 0 auto;
+        margin-right: 0.6rem;
+        padding: 0;
+    }
+    .program-table .day-spacer {
+        display: none;
+    }
+    .date-badge {
+        width: 42px;
+        padding: 0.4rem 0.2rem 0.3rem;
+        margin: 0;
+    }
+    .date-badge .date-num { font-size: 1.05rem; }
+    .date-badge .date-month { font-size: 0.55rem; }
+    .program-table .time {
+        order: 2;
+        flex: 0 0 auto;
+        width: auto;
+        white-space: nowrap;
+    }
+    .program-table .title,
+    .program-table .abstract-toggle,
+    .program-table .plain-title {
+        order: 3;
+        flex: 1 1 100%;
+        width: 100%;
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+        white-space: normal;
+    }
+    .program-table .speaker {
+        order: 4;
+        flex: 1 1 100%;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.82rem;
+    }
+    .program-table .abstract-cell {
+        order: 3;
+        flex: 1 1 100%;
+        width: 100%;
+    }
+    .abstract-content { padding: 0.7rem 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
