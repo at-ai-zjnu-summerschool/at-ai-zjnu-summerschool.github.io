@@ -450,6 +450,15 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     color: var(--primary);
     margin-bottom: 0.5rem;
 }
+
+.list-semibold {
+    font-weight: 400;
+}
+
+.ul-bold {
+    font-weight: 600;
+}
+
 .abstract-content p {
     margin-bottom: 0.6rem;
 }
