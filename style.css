@@ -100,8 +100,8 @@ body {
 }
 .hero h2 {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    font-style: italic;
     font-weight: 400;
     color: #d7ecc9;
     margin-top: 0.5rem;
@@ -662,6 +662,11 @@ footer a:hover {
     margin-right: auto;
     font-weight: 500;
 }
+
+.registration-box p.registration-title {
+    font-family: var(--font-display);
+}
+
 .register-btn {
     display: inline-block;
     font-family: var(--font);
