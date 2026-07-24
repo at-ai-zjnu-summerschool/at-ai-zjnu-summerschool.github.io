@@ -146,9 +146,18 @@ section {
 /* Griglia relatori */
 .speakers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.8rem;
 }
+
+/* Card "solitaria" (es. ultimo speaker online quando resta da sola
+   nell'ultima riga): la mettiamo nella colonna centrale del grid a 3
+   colonne, così ha ESATTAMENTE la stessa larghezza delle altre card
+   (è una traccia del grid come le altre), solo centrata. */
+.speakers-grid .speaker-card--solo {
+    grid-column: 2 / 3;
+}
+
 .speaker-card {
     background: #ecf3e8;
     border-radius: 16px;
@@ -468,6 +477,18 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     text-align: center;
 }
 
+/* Responsive: griglia speaker a 2 colonne su tablet */
+@media (max-width: 1000px) {
+    .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* con 2 colonne la card "solo" ricade naturalmente nel posto
+       giusto (affianco al penultimo speaker), niente da centrare */
+    .speakers-grid .speaker-card--solo {
+        grid-column: auto;
+    }
+}
+
 /* Responsive */
 @media (max-width: 700px) {
     body { padding: 1rem 0.5rem; }
@@ -478,12 +499,18 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     }
     header h1 { font-size: 2rem; }
     .section-title { font-size: 1.5rem; }
-    .speakers-grid { grid-template-columns: 1fr; }
     .bio-en, .bio-zh {
         padding: 0.3rem 0.4rem;
         font-size: 0.85rem;
     }
     .abstract-content { font-size: 0.82rem; }
+}
+
+/* Responsive: griglia speaker a 1 colonna su mobile */
+@media (max-width: 650px) {
+    .speakers-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Tabella programma: da tabella a "card" impilate, ma con lo stesso
