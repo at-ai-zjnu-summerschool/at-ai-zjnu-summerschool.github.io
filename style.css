@@ -145,9 +145,8 @@ section {
 
 /* Griglia relatori */
 .speakers-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.8rem;
 }
 .speaker-card {
@@ -161,10 +160,7 @@ section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    flex: 0 1 320px;
-    width: 320px;
 }
-
 .speaker-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(1, 90, 42, 0.12);
@@ -482,10 +478,7 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     }
     header h1 { font-size: 2rem; }
     .section-title { font-size: 1.5rem; }
-    .speaker-card {
-        width: 100%;
-        flex-basis: 100%;
-    }
+    .speakers-grid { grid-template-columns: 1fr; }
     .bio-en, .bio-zh {
         padding: 0.3rem 0.4rem;
         font-size: 0.85rem;
@@ -493,7 +486,12 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     .abstract-content { font-size: 0.82rem; }
 }
 
-
+/* Tabella programma: da tabella a "card" impilate, ma con lo stesso
+   linguaggio visivo della tabella desktop (righe piene, alternanza
+   colore per giorno, linee separatrici tra i campi).
+   Attiva SOLO su schermi realmente da smartphone: sopra questa soglia
+   (tablet compresi) resta la tabella normale, con scroll orizzontale
+   se necessario. */
 @media (max-width: 480px) {
     .program-table { font-size: 0.85rem; }
     .program-table thead { display: none; }
