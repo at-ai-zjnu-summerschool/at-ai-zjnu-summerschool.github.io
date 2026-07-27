@@ -150,10 +150,6 @@ section {
     gap: 1.8rem;
 }
 
-/* Card "solitaria" (es. ultimo speaker online quando resta da sola
-   nell'ultima riga): la mettiamo nella colonna centrale del grid a 3
-   colonne, così ha ESATTAMENTE la stessa larghezza delle altre card
-   (è una traccia del grid come le altre), solo centrata. */
 .speakers-grid .speaker-card--solo {
     grid-column: 2 / 3;
 }
@@ -197,7 +193,7 @@ section {
     margin-bottom: 0.6rem;
     font-weight: 400;
 }
-/* Biografia espandibile */
+
 .speaker-card details {
     width: 100%;
     margin-top: 0.3rem;
@@ -375,7 +371,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     background: #eef3e9;
 }
 
-/* Titolo semplice (righe senza abstract, es. registrazione, cerimonie) */
 .plain-title {
     display: inline-block;
     font-family: var(--font);
@@ -385,7 +380,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     line-height: 1.4;
 }
 
-/* Pulsante toggle abstract nel titolo */
 .abstract-toggle {
     font-family: var(--font);
     font-size: 0.95rem;
@@ -430,7 +424,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
 }
 
 
-/* Riga abstract nascosta di default */
 .abstract-row {
     display: none;
 }
@@ -477,13 +470,11 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     text-align: center;
 }
 
-/* Responsive: griglia speaker a 2 colonne su tablet */
 @media (max-width: 1000px) {
     .speakers-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    /* con 2 colonne la card "solo" ricade naturalmente nel posto
-       giusto (affianco al penultimo speaker), niente da centrare */
+    
     .speakers-grid .speaker-card--solo {
         grid-column: auto;
     }
@@ -506,19 +497,12 @@ tr.abstract-row.day-group-b > td.abstract-cell {
     .abstract-content { font-size: 0.82rem; }
 }
 
-/* Responsive: griglia speaker a 1 colonna su mobile */
 @media (max-width: 650px) {
     .speakers-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* Tabella programma: da tabella a "card" impilate, ma con lo stesso
-   linguaggio visivo della tabella desktop (righe piene, alternanza
-   colore per giorno, linee separatrici tra i campi).
-   Attiva SOLO su schermi realmente da smartphone: sopra questa soglia
-   (tablet compresi) resta la tabella normale, con scroll orizzontale
-   se necessario. */
 @media (max-width: 480px) {
     .program-table { font-size: 0.85rem; }
     .program-table thead { display: none; }
@@ -527,8 +511,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         width: 100%;
     }
 
-    /* La riga diventa una card unica: un solo colore di sfondo,
-       un bordo e angoli arrotondati, invece di tanti "chip" separati */
     .program-table tbody tr:not(.abstract-row) {
         display: flex;
         flex-wrap: wrap;
@@ -545,8 +527,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         background: #f8faf6;
     }
 
-    /* La riga abstract aperta prosegue la stessa card, senza bordo/radius
-       in alto, così sembra un'unica scheda con la riga sopra */
     .program-table tbody tr.abstract-row.open {
         display: flex;
         flex-wrap: wrap;
@@ -564,22 +544,16 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         background: #eef3e9;
     }
 
-    /* Quando una card ha l'abstract aperto subito sotto, la card non deve
-       avere il proprio margine: l'unico margine è quello della riga abstract */
     .program-table tbody tr:not(.abstract-row):has(+ tr.abstract-row.open) {
         margin-bottom: 0;
     }
 
-    /* I singoli td non hanno più un colore proprio: il colore ora vive
-       sulla riga (vedi sopra), i td restano solo contenitori trasparenti */
     .program-table td {
         padding: 0;
         border-bottom: none;
         background: transparent !important;
     }
 
-    /* La data occupa da sola tutta la larghezza della card, sopra
-       l'orario, così non resta schiacciata accanto al titolo */
     .program-table .day,
     .program-table .day-spacer {
         border-right: none;
@@ -617,9 +591,6 @@ tr.abstract-row.day-group-b > td.abstract-cell {
         border-bottom: 1px solid var(--border);
     }
 
-    /* Il td.title resta solo un contenitore per il layout; la riga
-       separatrice sta unicamente sull'elemento interno (bottone o testo),
-       cosi non compaiono due linee sovrapposte tra titolo e relatore */
     .program-table .title {
         order: 3;
         flex: 1 1 100%;
