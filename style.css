@@ -703,18 +703,23 @@ footer a:hover {
     font-weight: 500;
 }
 
+.deadline {
+    margin-top: 1.5rem;
+}
+
 .deadline p {
     font-size: 1.2rem;
     color: var(--text-light);
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 0.5rem;
     font-weight: 500;
 }
 
 .deadline .registration-small {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-style: italic;
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
 .register-btn {
