@@ -129,6 +129,39 @@ body {
     color: #ffffff;
 }
 
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(2px);
+    padding: 0.7rem 1.8rem;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.hero-btn:hover {
+    background: #ffffff;
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+.hero-btn:active {
+    transform: translateY(0);
+}
+.hero-btn-zh {
+    font-weight: 500;
+    opacity: 0.85;
+    font-size: 0.92rem;
+}
+
 /* Sezioni */
 section {
     margin-bottom: 3.5rem;
